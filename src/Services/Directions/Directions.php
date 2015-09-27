@@ -113,7 +113,7 @@ class Directions extends AbstractService
                 $stopover = $waypoint->getStopover() ? 'via:' : '';
 
                 if (is_string($waypoint->getLocation())) {
-                    $waypoints[] = $stopover.$waypoint->getLocation();
+                    $waypoints[] = $stopover . $waypoint->getLocation();
                 } else {
                     $waypoints[] = sprintf(
                         '%s%s,%s',
@@ -206,9 +206,9 @@ class Directions extends AbstractService
     protected function parseXML($response)
     {
         $rules = array(
-            'leg'   => 'legs',
+            'leg' => 'legs',
             'route' => 'routes',
-            'step'  => 'steps',
+            'step' => 'steps',
         );
 
         return $this->xmlParser->parse($response, $rules);
@@ -238,7 +238,7 @@ class Directions extends AbstractService
      */
     protected function buildDirectionsRoutes(array $directionsRoutes)
     {
-        $results =  array();
+        $results = array();
         foreach ($directionsRoutes as $directionsRoute) {
             $results[] = $this->buildDirectionsRoute($directionsRoute);
         }
@@ -309,7 +309,7 @@ class Directions extends AbstractService
      */
     protected function buildDirectionsLegs(array $directionsLegs)
     {
-        $results =  array();
+        $results = array();
         foreach ($directionsLegs as $directionsLeg) {
             $results[] = $this->buildDirectionsLeg($directionsLeg);
         }
@@ -362,9 +362,15 @@ class Directions extends AbstractService
      */
     protected function buildDirectionsSteps(array $directionsSteps)
     {
-        $results =  array();
+        $results = array();
         foreach ($directionsSteps as $directionsStep) {
-            $results[] = $this->buildDirectionsStep($directionsStep);
+            if (isset($directionsStep->steps)) {
+                foreach ($directionsStep->steps as $step) {
+                    $results[] = $this->buildDirectionsStep($step);
+                }
+            } else {
+                $results[] = $this->buildDirectionsStep($directionsStep);
+            }
         }
 
         return $results;
