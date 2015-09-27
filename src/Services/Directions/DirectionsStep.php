@@ -47,6 +47,9 @@ class DirectionsStep
     /** @var string */
     protected $travelMode;
 
+    /** @var  array */
+    protected $transitDetails;
+
     /**
      * Creates a directions step.
      *
@@ -65,7 +68,8 @@ class DirectionsStep
         $instructions,
         EncodedPolyline $encodedPolyline,
         Coordinate $startLocation,
-        $travelMode
+        $travelMode,
+        $transitDetails = array()
     ) {
         $this->setDistance($distance);
         $this->setDuration($duration);
@@ -74,6 +78,7 @@ class DirectionsStep
         $this->setEncodedPolyline($encodedPolyline);
         $this->setStartLocation($startLocation);
         $this->setTravelMode($travelMode);
+        $this->setTransitDetails($transitDetails);
     }
 
     /**
@@ -227,4 +232,22 @@ class DirectionsStep
 
         $this->travelMode = $travelMode;
     }
+
+    /**
+     * @return array
+     */
+    public function getTransitDetails()
+    {
+        return $this->transitDetails;
+    }
+
+    /**
+     * @param array $transitDetails
+     */
+    public function setTransitDetails($transitDetails)
+    {
+        $this->transitDetails = $transitDetails;
+    }
+
+
 }

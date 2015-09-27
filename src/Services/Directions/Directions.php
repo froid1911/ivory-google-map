@@ -386,6 +386,7 @@ class Directions extends AbstractService
         $encodedPolyline = new EncodedPolyline($directionsStep->polyline->points);
         $startLocation = new Coordinate($directionsStep->start_location->lat, $directionsStep->start_location->lng);
         $travelMode = $directionsStep->travel_mode;
+        $transitDetails = isset($directionsStep->transit_details) ? $directionsStep->transit_details : null;
 
         return new DirectionsStep(
             $distance,
@@ -394,7 +395,8 @@ class Directions extends AbstractService
             $instructions,
             $encodedPolyline,
             $startLocation,
-            $travelMode
+            $travelMode,
+            $transitDetails
         );
     }
 }
