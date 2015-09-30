@@ -272,6 +272,7 @@ class Directions extends AbstractService
         // @codeCoverageIgnoreEnd
 
         $summary = $directionsRoute->summary;
+        $distance = $directionsRoute->distance;
         $copyrights = $directionsRoute->copyrights;
 
         $directionsLegs = $this->buildDirectionsLegs($directionsRoute->legs);
@@ -295,6 +296,7 @@ class Directions extends AbstractService
             $directionsLegs,
             $overviewPolyline,
             $summary,
+            $distance,
             $warnings,
             $waypointOrder
         );

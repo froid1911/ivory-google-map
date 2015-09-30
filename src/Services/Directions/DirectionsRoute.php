@@ -44,16 +44,19 @@ class DirectionsRoute
     /** @var array */
     protected $waypointOrder;
 
+    /** @var array */
+    protected $distance;
+
     /**
      * Creates a directions route.
      *
-     * @param \Ivory\GoogleMap\Base\Bound               $bound            The bound.
-     * @param string                                    $copyrights       The copyrights.
-     * @param array                                     $legs             The legs.
+     * @param \Ivory\GoogleMap\Base\Bound $bound The bound.
+     * @param string $copyrights The copyrights.
+     * @param array $legs The legs.
      * @param \Ivory\GoogleMap\Overlays\EncodedPolyline $overviewPolyline The encoded polyline.
-     * @param string                                    $summary          The summary.
-     * @param array                                     $warnings         The warnings.
-     * @param array                                     $waypointOrder    The waypoint order.
+     * @param string $summary The summary.
+     * @param array $warnings The warnings.
+     * @param array $waypointOrder The waypoint order.
      */
     public function __construct(
         Bound $bound,
@@ -61,9 +64,11 @@ class DirectionsRoute
         array $legs,
         EncodedPolyline $overviewPolyline,
         $summary,
+        $distance,
         array $warnings,
         array $waypointOrder
-    ) {
+    )
+    {
         $this->setBound($bound);
         $this->setCopyrights($copyrights);
         $this->setLegs($legs);
@@ -71,7 +76,27 @@ class DirectionsRoute
         $this->setSummary($summary);
         $this->setWarnings($warnings);
         $this->setWaypointOrder($waypointOrder);
+        $this->setDistance($distance);
     }
+
+    /**
+     * @return array
+     */
+    public function getDistance()
+    {
+        return $this->distance;
+    }
+
+    /**
+     * @param array $distance
+     */
+    public function setDistance($distance)
+    {
+        $this->distance = $distance;
+    }
+
+
+
 
     /**
      * Gets the route bound.
