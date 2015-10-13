@@ -390,12 +390,12 @@ class Directions extends AbstractService
         $distance = new Distance($directionsStep->distance->text, $directionsStep->distance->value);
         $duration = new Duration($directionsStep->duration->text, $directionsStep->duration->value);
         $endLocation = new Coordinate($directionsStep->end_location->lat, $directionsStep->end_location->lng);
-        $instructions = isset($directionsStep->html_instructions) ? $directionsStep->html_instructions : null;
+        $instructions = isset($directionsStep->html_instructions) ? $directionsStep->html_instructions : '';
         $encodedPolyline = new EncodedPolyline($directionsStep->polyline->points);
         $startLocation = new Coordinate($directionsStep->start_location->lat, $directionsStep->start_location->lng);
         $travelMode = $directionsStep->travel_mode;
-        $transitDetails = isset($directionsStep->transit_details) ? $directionsStep->transit_details : null;
-        $htmlInstructions = isset($directionsStep->html_instructions) ? $directionsStep->html_instructions : null;
+        $transitDetails = isset($directionsStep->transit_details) ? $directionsStep->transit_details : '';
+        $htmlInstructions = isset($directionsStep->html_instructions) ? $directionsStep->html_instructions : '';
 
         return new DirectionsStep(
             $distance,
