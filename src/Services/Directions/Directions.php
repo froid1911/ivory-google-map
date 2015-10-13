@@ -272,7 +272,7 @@ class Directions extends AbstractService
         // @codeCoverageIgnoreEnd
 
         $summary = $directionsRoute->summary;
-        $distance = $directionsRoute->distance;
+        $distance = isset($directionsRoute->distance) ? $directionsRoute->distance : null ;
         $copyrights = $directionsRoute->copyrights;
 
         $directionsLegs = $this->buildDirectionsLegs($directionsRoute->legs);
