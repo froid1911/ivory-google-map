@@ -231,10 +231,31 @@ class AutocompleteHelper extends AbstractHelper
         }
 
         return sprintf(
-            '%s = new google.maps.places.Autocomplete(document.getElementById(\'%s\'), %s);'.PHP_EOL,
+            '%s = new google.maps.places.Autocomplete(document.getElementById(\'%s\'), %s);
+            %s.addListener(\'place_changed\', function() {
+
+    var place = %s.getPlace();
+    if (!place.geometry) {
+      window.alert("Autocomplete\'s returned place contains no geometry");
+      return;
+    }
+
+    // If the place has a geometry, then save it in hidden formfields
+    if (place.geometry.location) {
+      console.log(place.geometry.location);
+      document.getElementById(\'%s_latitude\').value = place.geometry.location.G
+      document.getElementById(\'%s_longitude\').value = place.geometry.location.K
+    }
+  });
+
+            ' . PHP_EOL,
             $autocomplete->getJavascriptVariable(),
             $autocomplete->getInputId(),
-            $this->jsonBuilder->build()
+            $this->jsonBuilder->build(),
+            $autocomplete->getJavascriptVariable(),
+            $autocomplete->getJavascriptVariable(),
+            $autocomplete->getInputId(),
+            $autocomplete->getInputId()
         );
     }
 }
