@@ -242,9 +242,8 @@ class AutocompleteHelper extends AbstractHelper
 
     // If the place has a geometry, then save it in hidden formfields
     if (place.geometry.location) {
-      console.log(place.geometry.location);
-      document.getElementById(\'%s_latitude\').value = place.geometry.location.G
-      document.getElementById(\'%s_longitude\').value = place.geometry.location.K
+      document.getElementById(\'%s_latitude\').value = place.geometry.location.lat()
+      document.getElementById(\'%s_longitude\').value = place.geometry.location.lng()
     }
   });
 
